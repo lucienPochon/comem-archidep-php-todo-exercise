@@ -18,14 +18,13 @@ switch($_POST['action']) {
    */
   case 'new':
 
-    $title = $_POST['title'];
-    if ($title && $title !== '') {
-      $insertQuery = 'INSERT INTO todo VALUES(NULL, \''.$title.'\', FALSE, CURRENT_TIMESTAMP)';
-      if (!$db->query($insertQuery)) {
+      $title = $_POST['title'];
+      if ($title && $title !== '') {
+        $insertQuery = 'INSERT INTO todo VALUES(NULL, \''.$title.'\', FALSE, CURRENT_TIMESTAMP)';
+        if (!$db->query($insertQuery)) {
         die(print_r($db->errorInfo(), true));
       }
-    }
-
+}
     header('Location: '.BASE_URL);
     die();
 
@@ -37,7 +36,7 @@ switch($_POST['action']) {
 
     $id = $_POST['id'];
     if(is_numeric($id)) {
-      $updateQuery = ''; // IMPLEMENT ME
+      $updateQuery = "UPDATE todo SET done = !done WHERE id = '$id' "; // IMPLEMENT ME
       if(!$db->query($updateQuery)) {
         die(print_r($db->errorInfo(), true));
       }
